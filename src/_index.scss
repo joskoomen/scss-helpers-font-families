@@ -1,0 +1,41 @@
+@charset "UTF-8";
+
+$font-families: (
+    'primary' : $body-font-family,
+    'code' : $font-stack-consolas
+) !default;
+
+$helpers-font-families-class-prefix: ' fnt-f' !default;
+
+@mixin helpers-font-families($responsive : false) {
+  
+  @if $responsive {
+    
+    @each $font in $font-families {
+      $key: nth($font, 1);
+      $font-family: nth($font, 2);
+      
+      @each $classname in $breakpoint-classes {
+        
+        @include breakpoint($classname) {
+          
+          .#{$classname}-#{$helpers-font-families-class-prefix}-#{$key} {
+            font-family: $font-family !important;
+          }
+          
+        }
+      }
+    }
+    
+  } @else {
+    
+    @each $font in $font-families {
+      $key: nth($font, 1);
+      $font-family: nth($font, 2);
+      
+      .#{$helpers-font-families-class-prefix}-#{$key} {
+        font-family: $font-family;
+      }
+    }
+  }
+}
