@@ -11,13 +11,12 @@ $helpers-font-families-class-prefix: ' fnt-f' !default;
   
   @if $responsive {
     
-    @each $font in $font-families {
-      $key: nth($font, 1);
-      $font-family: nth($font, 2);
+    @each $classname in $breakpoint-classes {
       
-      @each $classname in $breakpoint-classes {
-        
-        @include breakpoint($classname) {
+      @include breakpoint($classname) {
+        @each $font in $font-families {
+          $key: nth($font, 1);
+          $font-family: nth($font, 2);
           
           .#{$classname}-#{$helpers-font-families-class-prefix}-#{$key} {
             font-family: $font-family !important;
